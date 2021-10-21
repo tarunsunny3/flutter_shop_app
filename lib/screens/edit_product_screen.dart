@@ -33,6 +33,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             TextFormField(
                 decoration: InputDecoration(labelText: "Description"),
                 maxLines: 4,
+                keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_priceFocusNode);
