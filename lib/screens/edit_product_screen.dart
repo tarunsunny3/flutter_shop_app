@@ -20,7 +20,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           child: ListView(children: [
             TextFormField(
               decoration: InputDecoration(labelText: "Title"),
-              textInputAction: TextInputAction.next,
+              // textInputAction: TextInputAction.next,
             ),
             TextFormField(
               decoration: InputDecoration(labelText: "Price"),
