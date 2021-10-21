@@ -49,7 +49,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
               keyboardType: TextInputType.multiline,
               focusNode: _descFocusNode,
             ),
-            Row(children: [
+            Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
               Container(
                 width: 100,
                 height: 100,
