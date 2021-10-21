@@ -19,15 +19,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
         child: Form(
           child: ListView(children: [
             TextFormField(
-              decoration: InputDecoration(labelText: "Title"),
-              // textInputAction: TextInputAction.next,
-            ),
+                decoration: InputDecoration(labelText: "Title"),
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_priceFocusNode);
+                }),
             TextFormField(
               decoration: InputDecoration(labelText: "Price"),
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.number,
               focusNode: _priceFocusNode,
             ),
+            TextFormField(
+                decoration: InputDecoration(labelText: "Description"),
+                maxLines: 4,
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_priceFocusNode);
+                }),
           ]),
         ),
       ),
