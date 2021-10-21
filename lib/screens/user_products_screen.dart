@@ -26,9 +26,9 @@ class UserProductsScreen extends StatelessWidget {
               imageUrl: productsData.items[i].imageUrl,
             ),
             Divider(
-                // thickness: 4,
-                // color: Colors.red,
-                ),
+              thickness: 2,
+              // color: Colors.red,
+            ),
           ]),
         ),
       ),
