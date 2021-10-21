@@ -9,7 +9,7 @@ class UserProductItem extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.only(top: 15, left: 10),
+      contentPadding: EdgeInsets.only(top: 20, left: 10),
       title: Text(title),
       leading: CircleAvatar(
         backgroundImage: NetworkImage(imageUrl),
