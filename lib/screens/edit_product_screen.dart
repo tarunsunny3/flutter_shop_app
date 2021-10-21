@@ -59,12 +59,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 ),
                 child: Container(child: _imageUrlController.text.isEmpty ? Text("Please enter a URL") : FittedBox(child: Image.network(_imageUrlController.text, fit: BoxFit.cover))),
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: "Image URL"),
-                keyboardType: TextInputType.url,
-                textInputAction: TextInputAction.done,
-                controller: _imageUrlController,
-              ),
+              Expanded(
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: "Image URL"),
+                  keyboardType: TextInputType.url,
+                  textInputAction: TextInputAction.done,
+                  controller: _imageUrlController,
+                ),
+              )
             ]),
           ]),
         ),
