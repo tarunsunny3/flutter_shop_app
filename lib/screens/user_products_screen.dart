@@ -27,7 +27,7 @@ class UserProductsScreen extends StatelessWidget {
             ),
             Divider(
               thickness: 10,
-              color: Colors.red,
+              // color: Colors.red,
             ),
           ]),
         ),
