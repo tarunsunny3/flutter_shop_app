@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+// import '../screens/user_products_screen.dart';
+import '../providers/products.dart';
 
 import '../screens/edit_product_screen.dart';
 
 class UserProductItem extends StatelessWidget {
   @override
+  final String id;
   final String title;
   final String imageUrl;
 
-  UserProductItem({required this.title, required this.imageUrl});
+  UserProductItem(
+      {required this.id, required this.title, required this.imageUrl});
 
   Widget build(BuildContext context) {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListTile(
       contentPadding: EdgeInsets.only(top: 20, left: 10),
       title: Text(title),
@@ -21,12 +27,22 @@ class UserProductItem extends StatelessWidget {
           child: Row(children: [
             IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(EditProductScreen.routeName);
+                Navigator.of(context)
+                    .pushNamed(EditProductScreen.routeName, arguments: id);
               },
-              icon: Icon(Icons.edit, color: Theme.of(context).primaryColor),
+              icon: Icon(Icons.edit),
+              color: Theme.of(context).primaryColor,
             ),
             IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    await Provider.of<Products>(context, listen: false)
+                        .removeProduct(id);
+                  } catch (e) {
+                    scaffoldMessenger.showSnackBar(
+                        SnackBar(content: Text("Deleting failed!")));
+                  }
+                },
                 icon: Icon(
                   Icons.delete,
                   color: Theme.of(context).errorColor,
