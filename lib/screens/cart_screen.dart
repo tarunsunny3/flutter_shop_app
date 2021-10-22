@@ -31,20 +31,11 @@ class CartScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     Chip(
-                      label: Text('\$${cart.totalAmount.toStringAsFixed(2)}', style: TextStyle(color: Colors.white)),
+                      label: Text('\$${cart.totalAmount.toStringAsFixed(2)}',
+                          style: TextStyle(color: Colors.white)),
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    FlatButton(
-                      child: Text('ORDER NOW'),
-                      onPressed: () {
-                        if (cart.items.values.length > 0) {
-                          Provider.of<Orders>(context, listen: false).addOrder(cart.items.values.toList(), cart.totalAmount);
-                          cart.clearCart();
-                        }
-                        Navigator.of(context).pushNamed(OrdersScreen.routeName);
-                      },
-                      textColor: Theme.of(context).primaryColor,
-                    )
+                    OrderButton(cart: cart),
                   ],
                 )),
           ),
@@ -61,5 +52,45 @@ class CartScreen extends StatelessWidget {
             ),
           ))
         ]));
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+
+  final Cart cart;
+
+  @override
+  State<OrderButton> createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  var _isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
+      onPressed: (widget.cart.totalAmount <= 0 || _isLoading)
+          ? null
+          : () async {
+              try {
+                setState(() {
+                  _isLoading = true;
+                });
+                await Provider.of<Orders>(context, listen: false).addOrder(
+                    widget.cart.items.values.toList(), widget.cart.totalAmount);
+                widget.cart.clearCart();
+                Navigator.of(context).pushNamed(OrdersScreen.routeName);
+              } catch (e) {
+                print(e);
+              }
+              setState(() {
+                _isLoading = false;
+              });
+            },
+    );
   }
 }
