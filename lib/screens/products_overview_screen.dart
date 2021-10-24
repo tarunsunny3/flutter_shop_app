@@ -9,10 +9,7 @@ import '../providers/cart.dart';
 
 import '../screens/cart_screen.dart';
 
-enum FilterOptions {
-  Favorites,
-  All,
-}
+enum FilterOptions { Favorites, All }
 
 class ProductsOverviewScreen extends StatefulWidget {
   @override
@@ -91,7 +88,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 Navigator.of(context).pushNamed(CartScreen.routeName);
               },
             ),
-          )
+          ),
         ],
       ),
       drawer: AppDrawer(),

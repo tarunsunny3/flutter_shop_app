@@ -41,7 +41,8 @@ class Products with ChangeNotifier {
     // ),
   ];
   // var _showFavoritesOnly = false;
-
+  final String authToken;
+  Products(this.authToken, this._items);
   List<Product> get items {
     // if (_showFavoritesOnly) {
     //   return _items.where((prodItem) => prodItem.isFavorite).toList();
@@ -60,7 +61,8 @@ class Products with ChangeNotifier {
   Future<void> fetchAndSetProducts() async {
     final url = Uri.https(
         'flutter-shop-app-745ad-default-rtdb.asia-southeast1.firebasedatabase.app',
-        'products.json');
+        'products.json',
+        {"auth": authToken});
     try {
       final response = await http.get(url);
       if (json.decode(response.body) == null) {
@@ -89,7 +91,8 @@ class Products with ChangeNotifier {
   Future<void> addProduct(Product product) async {
     final url = Uri.https(
         'flutter-shop-app-745ad-default-rtdb.asia-southeast1.firebasedatabase.app',
-        'products.json');
+        'products.json',
+        {"auth": authToken});
     try {
       final response = await http.post(url,
           body: json.encode({
@@ -118,7 +121,8 @@ class Products with ChangeNotifier {
     if (prodIndex >= 0) {
       final url = Uri.https(
           'flutter-shop-app-745ad-default-rtdb.asia-southeast1.firebasedatabase.app',
-          'products/$id.json');
+          'products/$id.json',
+          {"auth": authToken});
       try {
         await http.patch(url,
             body: json.encode({
@@ -139,7 +143,8 @@ class Products with ChangeNotifier {
   Future<void> removeProduct(String id) async {
     final url = Uri.https(
         'flutter-shop-app-745ad-default-rtdb.asia-southeast1.firebasedatabase.app',
-        'products/$id.json');
+        'products/$id.json',
+        {"auth": authToken});
     var existingProdIndex = _items.indexWhere((element) => element.id == id);
     var existingProduct = _items[existingProdIndex];
     _items.removeAt(existingProdIndex);
